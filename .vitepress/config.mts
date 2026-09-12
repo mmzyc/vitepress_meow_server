@@ -1,38 +1,17 @@
 import { defineConfig } from 'vitepress'
+import { nav, sidebar } from './config/main.ts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "docs",
   
-  title: "测试站点",
-  description: "这是一个测试站点",
+  title: "喵际旅人",
+  description: "这是喵际旅人服务器的docs文档",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: '主页', link: '/' },
-      { text: '关于', link: '/about' }
-    ],
+    nav,
 
-    sidebar: [
-      {
-        text: 'Main',
-        items: [
-          { text: '关于', link: '/about' },
-          // { text: 'Runtime API Examples', link: '/api-examples' }
-          {text: '服务器规则', link: '/rules'}
-        ]
-      },
-
-      {
-        text: '更新日志',
-        link: '/',
-        base: '/versions/',
-        collapsed: true,
-        items: [
-          {text: '1.0', link: '1.0'}
-        ]
-      }
-    ],
+    sidebar,
 
     socialLinks: [
       // { icon: 'github', link: 'https://github.com/vuejs/vitepress' }

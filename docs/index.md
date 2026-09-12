@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "喵际旅人"
-  text: "这是喵际旅人服务器的docs文档"
+  text: "rpg养老服务器"
   tagline: 这是喵际旅人服务器的docs文档
   image:
     src: /logo.png

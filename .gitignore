@@ -20,3 +20,6 @@ TODOs.md
 
 # base fixture builds
 __tests__/base/fixture/.vitepress/dist-*
+
+# 预览
+dev.bat

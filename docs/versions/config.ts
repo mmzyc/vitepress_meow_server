@@ -14,7 +14,15 @@ export default defineConfig({
               base: '/versions/',
               collapsed: false,
               items: [
-                {text: '1.0', link: '1.0'}
+                // {text: '1.0', link: '1.0'}
+                {
+                  text: '6.x', 
+                  base: '/versions/6.x/',
+                  collapsed: true,
+                  items: [
+                    {text: '6.7', link: '6.7'}
+                  ]
+                }
               ]
             }
           ]

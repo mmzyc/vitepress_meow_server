@@ -1,0 +1,50 @@
+name: Upstream Sync
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 每天 UTC 0 点
+  workflow_dispatch:       # 允许在 Actions 页面手动触发
+
+jobs:
+  sync_latest_from_upstream:
+    name: Sync latest commits from upstream repo
+    runs-on: ubuntu-latest
+    if: ${{ github.event.repository.fork }}   # 只有 fork 仓库才跑
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Sync upstream changes
+        env:
+          # ⚠️ 改成你自己的原仓库地址
+          UPSTREAM_REPO: https://github.com/mmzyc/vitepress_meow_server.git
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 幂等：如果 upstream 已存在就不重复添加
+          git remote remove upstream 2>/dev/null || true
+          git remote add upstream "$UPSTREAM_REPO"
+          git fetch upstream main
+
+          if git diff --quiet HEAD upstream/main; then
+            # 内容与上游一致 → 直接对齐历史，顺手清掉分叉产生的多余 merge commit
+            echo "No local changes, hard-resetting to upstream/main"
+            git reset --hard upstream/main
+            git push --force-with-lease origin main
+          else
+            # 有本地改动 → 走 merge，不覆盖别人的东西
+            if ! git pull --no-rebase upstream main; then
+              echo "::error::合并上游变更产生冲突，自动同步已暂停，请手动 Sync Fork 并解决冲突。"
+              echo "::error::Merge conflict detected while syncing upstream. Please sync your fork manually and resolve the conflicts."
+              exit 1
+            fi
+            git push origin main
+          fi

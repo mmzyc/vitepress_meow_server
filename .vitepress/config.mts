@@ -5,6 +5,12 @@ import { nav, sidebar } from './config/main.ts'
 export default defineConfig({
   srcDir: "docs",
   
+  head: [
+    ['link', {
+      rel: 'icon', href: '/logo.png'
+    }]
+  ],
+
   title: "喵际旅人",
   description: "这是喵际旅人服务器的docs文档",
   themeConfig: {
@@ -27,9 +33,17 @@ export default defineConfig({
     outline: {
       level: 'deep',
       label: '页面导航'
+    },
+
+    lastUpdated: {
+      text: '最后编辑时间',
+      // formatOptions: { dateStyle: 'medium', timeStyle: 'short' }
     }
   },
   cleanUrls: true,
+
+  lastUpdated: true,
+
   vite: {
     server: {
       allowedHosts: ['my.mjmm.top']

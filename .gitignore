@@ -22,4 +22,4 @@ TODOs.md
 __tests__/base/fixture/.vitepress/dist-*
 
 # 预览
-./dev.bat
+/dev.bat

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { nav, sidebar } from './config/main.ts'
+import { nav, sidebar, socialLinks } from './config/main.ts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -19,9 +19,10 @@ export default defineConfig({
 
     sidebar,
 
-    socialLinks: [
-      // { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ],
+    // socialLinks: [
+    //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+    // ],
+    socialLinks,
 
     logo: '/logo.png',
 
@@ -38,6 +39,11 @@ export default defineConfig({
     lastUpdated: {
       text: '最后编辑时间',
       // formatOptions: { dateStyle: 'medium', timeStyle: 'short' }
+    },
+
+    editLink: {
+      pattern: 'https://github.com/mmzyc/vitepress_meow_server/tree/main/docs/:path',
+      text: '在 Github 上编辑此页面'
     }
   },
   cleanUrls: true,
